@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HealthyLife - Nutrition Explorer</title>
+  <meta name="description" content="Search foods, view basic nutrition info and get healthier alternatives" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="header container" role="banner">
+  <div class="brand" title="HealthyLife - Nutrition Explorer">
+    <img src="Health.ico" alt="HealthyLife Logo" class="logo-img" />
+    <strong>HealthyLife</strong>
+  </div>
+
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <a href="#hero">Home</a>
+    <a href="#search">Foods</a>
+    <a href="#tips">Tips</a>
+    <a href="#library">Library</a>
+    <button class="btn btn-sm btn-ghost theme-toggle" aria-pressed="false">Toggle Theme</button>
+  </nav>
+</header>
+
+  <main>
+    <section id="hero" class="hero container" aria-labelledby="hero-title">
+      <div class="left">
+        <h1 id="hero-title">Nutrition Explorer - Fast, Clear, Reliable</h1>
+        <p>Type a food or pick one from the suggestions. Get calories and macros at a glance, plus smart healthier alternatives.</p>
+
+        <div class="cta" id="search">
+          <label for="foodInput" class="sr-only">Search food</label>
+          <input list="food-list" id="foodInput" class="input" placeholder="Try: apple, salmon, quinoa..." aria-autocomplete="list" aria-controls="results" />
+          <button id="searchBtn" class="btn btn-primary">Check</button>
+          <button id="randomBtn" class="btn btn-ghost btn-sm" title="Show a random healthy suggestion">Surprise Me</button>
+        </div>
+
+        <p class="mt-1" style="color:var(--muted); font-size:.95rem">Tip: press Enter in the input to search. The input provides many suggestions from the built-in library.</p>
+      </div>
+
+      <div class="right" aria-hidden="true">
+        <div class="grid" style="grid-template-columns:repeat(1,1fr); gap:.6rem; max-width:320px">
+          <div class="card">
+            <div class="title">Quick Facts</div>
+            <div class="meta">Balanced plate guideline</div>
+            <p>Fill half your plate with vegetables, a quarter with lean protein, and a quarter with whole grains or starchy vegetables.</p>
+          </div>
+          <div class="card">
+            <div class="title">Goal</div>
+            <div class="meta">Small sustainable changes</div>
+            <p>Swap refined carbs for whole grains and choose water over sugary drinks.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="container mt-1" aria-labelledby="results-title">
+      <h2 id="results-title">Results</h2>
+      <div id="results" class="grid" role="region" aria-live="polite">
+        <div class="card">
+          <div class="title">No search yet</div>
+          <div class="meta">Type a food and press Check</div>
+          <p>Example: Try <strong>apple</strong>, <strong>salmon</strong>, or <strong>quinoa</strong>.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="container mt-1" aria-labelledby="popular-title">
+      <h2 id="popular-title">Popular Foods</h2>
+      <div class="grid" id="popularGrid">
+        <article class="card food-card" data-food="Apple" data-calories="52" data-protein="0.3" data-carbs="14" data-fat="0.2" role="button" tabindex="0">
+          <div class="title">Apple</div>
+          <div class="meta">52 kcal / 100g</div>
+          <p>Fresh fruit, fiber-rich. Alternative: Pear, Berries.</p>
+        </article>
+
+        <article class="card food-card" data-food="Banana" data-calories="96" data-protein="1.3" data-carbs="27" data-fat="0.3" role="button" tabindex="0">
+          <div class="title">Banana</div>
+          <div class="meta">96 kcal / 100g</div>
+          <p>Great pre-workout snack. Alternative: Apple, Dates.</p>
+        </article>
+
+        <article class="card food-card" data-food="Salmon" data-calories="208" data-protein="20" data-carbs="0" data-fat="13" role="button" tabindex="0">
+          <div class="title">Salmon</div>
+          <div class="meta">208 kcal / 100g</div>
+          <p>High in omega-3 fatty acids. Alternative: Trout, Sardines.</p>
+        </article>
+
+        <article class="card food-card" data-food="Quinoa" data-calories="120" data-protein="4.4" data-carbs="21" data-fat="1.9" role="button" tabindex="0">
+          <div class="title">Quinoa</div>
+          <div class="meta">120 kcal / 100g (cooked)</div>
+          <p>Complete plant protein. Alternative: Buckwheat, Brown rice.</p>
+        </article>
+
+        <article class="card food-card" data-food="Chicken Breast" data-calories="165" data-protein="31" data-carbs="0" data-fat="3.6" role="button" tabindex="0">
+          <div class="title">Chicken Breast</div>
+          <div class="meta">165 kcal / 100g</div>
+          <p>Lean protein. Alternative: Turkey, Tofu.</p>
+        </article>
+
+        <article class="card food-card" data-food="Avocado" data-calories="160" data-protein="2" data-carbs="9" data-fat="15" role="button" tabindex="0">
+          <div class="title">Avocado</div>
+          <div class="meta">160 kcal / 100g</div>
+          <p>Healthy fats and fiber. Alternative: Hummus, Nuts.</p>
+        </article>
+
+        <article class="card food-card" data-food="Greek Yogurt" data-calories="59" data-protein="10" data-carbs="3.6" data-fat="0.4" role="button" tabindex="0">
+          <div class="title">Greek Yogurt</div>
+          <div class="meta">59 kcal / 100g</div>
+          <p>High protein dairy. Alternative: Skyr, Cottage cheese.</p>
+        </article>
+
+        <article class="card food-card" data-food="Almonds" data-calories="579" data-protein="21" data-carbs="22" data-fat="50" role="button" tabindex="0">
+          <div class="title">Almonds</div>
+          <div class="meta">579 kcal / 100g</div>
+          <p>Rich in healthy fats. Alternative: Walnuts, Pistachios.</p>
+        </article>
+
+        <article class="card food-card" data-food="Brown Rice" data-calories="123" data-protein="2.7" data-carbs="25.6" data-fat="1" role="button" tabindex="0">
+          <div class="title">Brown Rice</div>
+          <div class="meta">123 kcal / 100g (cooked)</div>
+          <p>Whole grain. Alternative: Barley, Farro.</p>
+        </article>
+
+        <article class="card food-card" data-food="Spinach" data-calories="23" data-protein="2.9" data-carbs="3.6" data-fat="0.4" role="button" tabindex="0">
+          <div class="title">Spinach</div>
+          <div class="meta">23 kcal / 100g</div>
+          <p>Micronutrient-dense. Alternative: Kale, Swiss chard.</p>
+        </article>
+
+        <article class="card food-card" data-food="Sweet Potato" data-calories="86" data-protein="1.6" data-carbs="20" data-fat="0.1" role="button" tabindex="0">
+          <div class="title">Sweet Potato</div>
+          <div class="meta">86 kcal / 100g</div>
+          <p>Fiber & vitamin A. Alternative: Pumpkin, Butternut squash.</p>
+        </article>
+
+        <article class="card food-card" data-food="Lentils" data-calories="116" data-protein="9" data-carbs="20" data-fat="0.4" role="button" tabindex="0">
+          <div class="title">Lentils</div>
+          <div class="meta">116 kcal / 100g (cooked)</div>
+          <p>High plant protein. Alternative: Chickpeas, Beans.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="tips" class="container mt-1" aria-labelledby="tips-title">
+      <h2 id="tips-title">Healthy Tips</h2>
+      <div class="grid">
+        <div class="card">
+          <div class="title">Hydration</div>
+          <div class="meta">Drink water regularly</div>
+          <p>Start the day with a glass of water and keep a bottle nearby. Flavor with lemon or mint if needed.</p>
+        </div>
+
+        <div class="card">
+          <div class="title">Protein at every meal</div>
+          <div class="meta">Supports muscle & satiety</div>
+          <p>Include beans, yogurt, eggs, fish, or lean meat to improve fullness and recovery.</p>
+        </div>
+
+        <div class="card">
+          <div class="title">Colorful plates</div>
+          <div class="meta">Eat the rainbow</div>
+          <p>Variety of colors usually means a wider range of vitamins and antioxidants.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="library" class="container mt-1" aria-labelledby="library-title">
+      <h2 id="library-title">Food Library</h2>
+      <p class="mb-1" style="color:var(--muted)">Choose from the library suggestions (autocomplete) or type freely.</p>
+
+      <datalist id="food-list">
+        <option value="Apple">
+        <option value="Banana">
+        <option value="Orange">
+        <option value="Pear">
+        <option value="Peach">
+        <option value="Plum">
+        <option value="Mango">
+        <option value="Pineapple">
+        <option value="Strawberry">
+        <option value="Blueberry">
+        <option value="Raspberry">
+        <option value="Blackberry">
+        <option value="Watermelon">
+        <option value="Cantaloupe">
+        <option value="Honeydew">
+        <option value="Grapes">
+        <option value="Kiwi">
+        <option value="Apricot">
+        <option value="Fig">
+        <option value="Pomegranate">
+        <option value="Lemon">
+        <option value="Lime">
+        <option value="Avocado">
+        <option value="Tomato">
+        <option value="Cucumber">
+        <option value="Lettuce">
+        <option value="Spinach">
+        <option value="Kale">
+        <option value="Arugula">
+        <option value="Broccoli">
+        <option value="Cauliflower">
+        <option value="Cabbage">
+        <option value="Brussels sprouts">
+        <option value="Carrot">
+        <option value="Beetroot">
+        <option value="Radish">
+        <option value="Celery">
+        <option value="Bell pepper">
+        <option value="Chili pepper">
+        <option value="Eggplant">
+        <option value="Zucchini">
+        <option value="Pumpkin">
+        <option value="Butternut squash">
+        <option value="Sweet potato">
+        <option value="Potato">
+        <option value="Onion">
+        <option value="Garlic">
+        <option value="Leek">
+        <option value="Shallot">
+        <option value="Corn">
+        <option value="Peas">
+        <option value="Green beans">
+        <option value="Asparagus">
+        <option value="Mushroom">
+        <option value="Olives">
+        <option value="Artichoke">
+        <option value="Parsnip">
+        <option value="Turnip">
+        <option value="Yam">
+        <option value="Taro">
+        <option value="Plantain">
+        <option value="Quinoa">
+        <option value="Rice">
+        <option value="Brown rice">
+        <option value="Oats">
+        <option value="Barley">
+        <option value="Millet">
+        <option value="Bulgur">
+        <option value="Couscous">
+        <option value="Pasta">
+        <option value="Bread">
+        <option value="Whole wheat bread">
+        <option value="Rye bread">
+        <option value="Sourdough">
+        <option value="Bagel">
+        <option value="Tortilla">
+        <option value="Naan">
+        <option value="Chickpeas">
+        <option value="Lentils">
+        <option value="Black beans">
+        <option value="Kidney beans">
+        <option value="Pinto beans">
+        <option value="Soybeans">
+        <option value="Tofu">
+        <option value="Tempeh">
+        <option value="Edamame">
+        <option value="Almonds">
+        <option value="Walnuts">
+        <option value="Cashews">
+        <option value="Pistachios">
+        <option value="Hazelnuts">
+        <option value="Pecans">
+        <option value="Peanuts">
+        <option value="Peanut butter">
+        <option value="Almond butter">
+        <option value="Sunflower seeds">
+        <option value="Pumpkin seeds">
+        <option value="Chia seeds">
+        <option value="Flaxseed">
+        <option value="Sesame seeds">
+        <option value="Greek yogurt">
+        <option value="Yogurt">
+        <option value="Milk (whole)">
+        <option value="Milk (skim)">
+        <option value="Almond milk">
+        <option value="Soy milk">
+        <option value="Cheddar cheese">
+        <option value="Mozzarella">
+        <option value="Cottage cheese">
+        <option value="Ricotta">
+        <option value="Eggs">
+        <option value="Salmon">
+        <option value="Tuna">
+        <option value="Cod">
+        <option value="Trout">
+        <option value="Sardines">
+        <option value="Mackerel">
+        <option value="Shrimp">
+        <option value="Crab">
+        <option value="Lobster">
+        <option value="Chicken breast">
+        <option value="Chicken thigh">
+        <option value="Turkey">
+        <option value="Beef (ground)">
+        <option value="Steak">
+        <option value="Pork chop">
+        <option value="Bacon">
+        <option value="Ham">
+        <option value="Lamb">
+        <option value="Duck">
+        <option value="Venison">
+        <option value="Pepperoni">
+        <option value="Sausage">
+        <option value="Hot dog">
+        <option value="Pizza">
+        <option value="Burger">
+        <option value="Fries">
+        <option value="Ice cream">
+        <option value="Chocolate">
+        <option value="Dark chocolate">
+        <option value="Cake">
+        <option value="Cookies">
+        <option value="Donut">
+        <option value="Croissant">
+        <option value="Pancakes">
+        <option value="Waffle">
+        <option value="Syrup">
+        <option value="Honey">
+        <option value="Jam">
+        <option value="Granola">
+        <option value="Muesli">
+        <option value="Breakfast cereal">
+        <option value="Smoothie">
+        <option value="Coffee">
+        <option value="Tea">
+        <option value="Green tea">
+        <option value="Black tea">
+        <option value="Soda">
+        <option value="Orange juice">
+        <option value="Apple juice">
+        <option value="Tomato juice">
+        <option value="Beer">
+        <option value="Wine">
+        <option value="Whiskey">
+        <option value="Vodka">
+        <option value="Energy drink">
+        <option value="Water">
+        <option value="Sparkling water">
+        <option value="Coconut water">
+        <option value="Olive oil">
+        <option value="Coconut oil">
+        <option value="Butter">
+        <option value="Ghee">
+        <option value="Mayonnaise">
+        <option value="Ketchup">
+        <option value="Mustard">
+        <option value="Soy sauce">
+        <option value="Vinegar">
+        <option value="Balsamic vinegar">
+        <option value="Basil">
+        <option value="Cilantro">
+        <option value="Parsley">
+        <option value="Rosemary">
+        <option value="Thyme">
+        <option value="Oregano">
+        <option value="Cinnamon">
+        <option value="Nutmeg">
+        <option value="Turmeric">
+        <option value="Ginger">
+      </datalist>
+
+      <p class="mt-1" style="color:var(--muted)">Library contains common fruits, vegetables, grains, proteins, snacks and condiments. You can extend this list in the backend later.</p>
+    </section>
+
+    <footer class="footer container" role="contentinfo">
+      <div style="display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap">
+        <div>© 2025 HealthyLife - Built for learning & prototyping</div>
+        <div style="color:var(--muted); font-size:.95rem">Data here are example values. For production, connect a verified nutrition API (USDA, Edamam, Nutritionix).</div>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    (function(){
+      const input = document.getElementById('foodInput');
+      const btn = document.getElementById('searchBtn');
+      const randomBtn = document.getElementById('randomBtn');
+
+      if(input && btn){
+        input.addEventListener('keydown', (e)=>{ if(e.key === 'Enter'){ e.preventDefault(); btn.click(); } });
+      }
+
+      if(randomBtn){
+        randomBtn.addEventListener('click', ()=>{
+          const list = Array.from(document.querySelectorAll('#food-list option')).map(o=>o.value).filter(Boolean);
+          if(list.length===0) return;
+          const choice = list[Math.floor(Math.random()*list.length)];
+          input.value = choice;
+          btn.click();
+        });
+      }
+
+      document.querySelectorAll('.food-card').forEach(card=>{
+        card.addEventListener('click', ()=>{
+          const name = card.dataset.food || card.querySelector('.title')?.textContent;
+          if(!name) return;
+          input.value = name;
+          btn.click();
+        });
+        card.addEventListener('keydown', (e)=>{ if(e.key==='Enter' || e.key===' ') { e.preventDefault(); card.click(); } });
+      });
+    })();
+  </script>
+
+  <script src="app.js"></script>
+</body>
+</html>
